@@ -1,4 +1,4 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
 
 export interface ICard {
   text: string;
@@ -9,4 +9,16 @@ export interface ICard {
 export const cardState = atom<ICard[]>({
   key: "card",
   default: [],
+});
+
+export const cardSelector = selector({
+  key: "cardSelector",
+  get: ({ get }) => {
+    const cards = get(cardState);
+    return [
+      cards.filter((card) => card.category === "TODO"),
+      cards.filter((card) => card.category === "DOING"),
+      cards.filter((card) => card.category === "DONE"),
+    ];
+  },
 });

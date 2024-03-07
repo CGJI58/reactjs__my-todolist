@@ -1,18 +1,31 @@
 import { useRecoilValue } from "recoil";
-import { cardState } from "../atoms";
+import { cardSelector } from "../atoms";
 import Card from "./Card";
 import CreateCard from "./CreateCard";
 
 function CardList() {
-  const Cards = useRecoilValue(cardState);
-  console.log(Cards);
+  const [todo, doing, done] = useRecoilValue(cardSelector);
   return (
     <>
-      <h1>Cards</h1>
-      <hr />
       <CreateCard />
+      <hr />
+      <h1>To Do</h1>
       <ul>
-        {Cards.map((card) => (
+        {todo.map((card) => (
+          <Card key={card.id} {...card} />
+        ))}
+      </ul>
+      <hr />
+      <h1>Doing</h1>
+      <ul>
+        {doing.map((card) => (
+          <Card key={card.id} {...card} />
+        ))}
+      </ul>
+      <hr />
+      <h1>Done</h1>
+      <ul>
+        {done.map((card) => (
           <Card key={card.id} {...card} />
         ))}
       </ul>

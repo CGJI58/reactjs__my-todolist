@@ -5,6 +5,7 @@ import CreateCard from "./CreateCard";
 
 function CardList() {
   const Cards = useRecoilValue(cardState);
+  console.log(Cards);
   return (
     <>
       <h1>Cards</h1>

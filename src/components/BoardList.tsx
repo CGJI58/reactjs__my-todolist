@@ -4,22 +4,22 @@ import CreateCard from "./CreateCard";
 import styled from "styled-components";
 import Board from "./Board";
 
-const Boards = styled.div`
-  background-color: beige;
-`;
+const Wrapper = styled.div``;
 
-function CardList() {
+const Boards = styled.div``;
+
+function BoardList() {
   const [todo, doing, done] = useRecoilValue(cardSelector);
   return (
-    <>
+    <Wrapper>
       <CreateCard />
       <Boards>
         <Board cards={todo} />
         <Board cards={doing} />
         <Board cards={done} />
       </Boards>
-    </>
+    </Wrapper>
   );
 }
 
-export default CardList;
+export default BoardList;

@@ -6,11 +6,7 @@ interface IBoard {
   cards: ICard[];
 }
 
-const Wrapper = styled.div`
-  background-color: teal;
-  margin: 10px 0;
-  padding: 0 10px;
-`;
+const Wrapper = styled.div``;
 
 function Board({ cards }: IBoard) {
   return (

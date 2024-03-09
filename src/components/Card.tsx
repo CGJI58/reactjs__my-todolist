@@ -1,5 +1,12 @@
 import { useSetRecoilState } from "recoil";
 import { ICard, cardState } from "../atoms";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  li {
+    display: flex;
+  }
+`;
 
 function Card({ text, category, id }: ICard) {
   const setCards = useSetRecoilState(cardState);
@@ -13,18 +20,22 @@ function Card({ text, category, id }: ICard) {
     });
   };
   return (
-    <li>
-      <span>{text}</span>
-      {category !== "TODO" && (
-        <button onClick={() => onClick("TODO")}>ToDo</button>
-      )}
-      {category !== "DOING" && (
-        <button onClick={() => onClick("DOING")}>Doing</button>
-      )}
-      {category !== "DONE" && (
-        <button onClick={() => onClick("DONE")}>Done</button>
-      )}
-    </li>
+    <Wrapper>
+      <li>
+        <span>{text}</span>
+        <div>
+          {category !== "TODO" && (
+            <button onClick={() => onClick("TODO")}>ToDo</button>
+          )}
+          {category !== "DOING" && (
+            <button onClick={() => onClick("DOING")}>Doing</button>
+          )}
+          {category !== "DONE" && (
+            <button onClick={() => onClick("DONE")}>Done</button>
+          )}
+        </div>
+      </li>
+    </Wrapper>
   );
 }
 

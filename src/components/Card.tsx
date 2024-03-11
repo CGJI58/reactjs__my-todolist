@@ -1,42 +1,29 @@
-import { useSetRecoilState } from "recoil";
-import { ICard, cardState } from "../atoms";
+import React from "react";
+import { Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
-const Wrapper = styled.div`
-  li {
-    display: flex;
-  }
-`;
+const Context = styled.div``;
 
-function Card({ text, category, id }: ICard) {
-  const setCards = useSetRecoilState(cardState);
-  const onClick = (newCategory: ICard["category"]) => {
-    setCards((prevCards) => {
-      const targetIndex = prevCards.findIndex((card) => card.id === id);
-      const newCard = { text, id, category: newCategory };
-      const newCards = [...prevCards];
-      newCards.splice(targetIndex, 1, newCard);
-      return newCards;
-    });
-  };
+interface ICardProps {
+  text: string;
+  index: number;
+}
+
+function Card({ text, index }: ICardProps) {
+  console.log(text, "has been rendered");
   return (
-    <Wrapper>
-      <li>
-        <span>{text}</span>
-        <div>
-          {category !== "TODO" && (
-            <button onClick={() => onClick("TODO")}>ToDo</button>
-          )}
-          {category !== "DOING" && (
-            <button onClick={() => onClick("DOING")}>Doing</button>
-          )}
-          {category !== "DONE" && (
-            <button onClick={() => onClick("DONE")}>Done</button>
-          )}
-        </div>
-      </li>
-    </Wrapper>
+    <Draggable key={text} draggableId={text} index={index}>
+      {(drag) => (
+        <Context
+          ref={drag.innerRef}
+          {...drag.dragHandleProps}
+          {...drag.draggableProps}
+        >
+          {text}
+        </Context>
+      )}
+    </Draggable>
   );
 }
 
-export default Card;
+export default React.memo(Card);

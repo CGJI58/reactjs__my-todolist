@@ -1,6 +1,14 @@
 import { atom, selector } from "recoil";
 
-export const cardState = atom<string[]>({
-  key: "cardasdf",
-  default: ["a", "b", "c", "d"],
+interface IboardsListState {
+  [key: string]: string[];
+}
+
+export const boardsListState = atom<IboardsListState>({
+  key: "board",
+  default: {
+    to_do: ["a", "b"],
+    doing: ["c"],
+    done: ["d"],
+  },
 });

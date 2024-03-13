@@ -10,13 +10,14 @@ function App() {
   const [boards, setBoards] = useRecoilState(boardsListState);
 
   const onDragEnd = ({ draggableId, source, destination }: DropResult) => {
-    if (!destination) return;
-    // setCards((prev) => {
-    //   const prevCopy = [...prev];
-    //   prevCopy.splice(source.index, 1);
-    //   prevCopy.splice(destination.index, 0, draggableId);
-    //   return prevCopy;
-    // });
+    if (destination?.droppableId === source.droppableId) {
+      setBoards((prev) => {
+        const boardCopy = [...prev[source.droppableId]];
+        boardCopy.splice(source.index, 1);
+        boardCopy.splice(destination.index, 0, draggableId);
+        return { ...prev, [source.droppableId]: boardCopy };
+      });
+    }
   };
   return (
     <DragDropContext onDragEnd={onDragEnd}>

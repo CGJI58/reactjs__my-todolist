@@ -6,7 +6,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: black;
+  border: 1px solid ${(props) => props.theme.accentColor};
   width: 200px;
   height: 200px;
   margin: 10px 0;

@@ -4,8 +4,9 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
-  background-color: blue;
+  background-color: teal;
   margin: 10px 0;
+  padding: 5px;
 `;
 
 interface ICardProps {

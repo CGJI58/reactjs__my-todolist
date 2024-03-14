@@ -4,18 +4,36 @@ import { useRecoilState } from "recoil";
 import Board from "./components/Board";
 import { boardsListState } from "./atoms";
 
-const BoardsList = styled.div``;
+const BoardsList = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
 
 function App() {
   const [boards, setBoards] = useRecoilState(boardsListState);
-
   const onDragEnd = ({ draggableId, source, destination }: DropResult) => {
-    if (destination?.droppableId === source.droppableId) {
+    if (!destination) return;
+
+    if (destination.droppableId === source.droppableId) {
       setBoards((prev) => {
         const boardCopy = [...prev[source.droppableId]];
         boardCopy.splice(source.index, 1);
         boardCopy.splice(destination.index, 0, draggableId);
         return { ...prev, [source.droppableId]: boardCopy };
+      });
+    }
+
+    if (destination.droppableId !== source.droppableId) {
+      setBoards((prev) => {
+        const sourceBoard = [...prev[source.droppableId]];
+        const destinationBoard = [...prev[destination.droppableId]];
+        sourceBoard.splice(source.index, 1);
+        destinationBoard.splice(destination.index, 0, draggableId);
+        return {
+          ...prev,
+          [source.droppableId]: sourceBoard,
+          [destination.droppableId]: destinationBoard,
+        };
       });
     }
   };

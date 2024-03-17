@@ -7,8 +7,8 @@ interface IboardsListState {
 export const boardsListState = atom<IboardsListState>({
   key: "board",
   default: {
-    to_do: ["a", "b"],
+    "to do": ["a", "b"],
     doing: ["c"],
-    done: ["d"],
+    done: ["d", "e", "f"],
   },
 });

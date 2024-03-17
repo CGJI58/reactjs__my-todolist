@@ -3,13 +3,34 @@ import styled from "styled-components";
 import Card from "./Card";
 
 const Wrapper = styled.div`
+  border: 1px solid ${(props) => props.theme.accentColor};
+`;
+
+const Title = styled.h2`
+  border-bottom: 1px solid ${(props) => props.theme.accentColor};
+  padding: 5px;
+  text-align: center;
+  font-weight: bold;
+`;
+
+interface IDropArea {
+  isDragDepart: boolean;
+  isDragArrive: boolean;
+}
+
+const DropArea = styled.div<IDropArea>`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  border: 1px solid ${(props) => props.theme.accentColor};
   width: 200px;
-  height: 200px;
-  margin: 10px 0;
+  min-height: 200px;
+  overflow: hidden;
+  background-color: ${(props) =>
+    props.isDragArrive
+      ? "teal"
+      : props.isDragDepart
+      ? "tomato"
+      : props.theme.bgColor};
+  transition: background-color 0.3s ease-in-out;
 `;
 
 interface IBoardProps {
@@ -19,16 +40,24 @@ interface IBoardProps {
 
 function Board({ boardId, cards }: IBoardProps) {
   return (
-    <Droppable droppableId={boardId}>
-      {(drop) => (
-        <Wrapper ref={drop.innerRef} {...drop.droppableProps}>
-          {cards.map((card, index) => (
-            <Card key={card} index={index} text={card} />
-          ))}
-          {drop.placeholder}
-        </Wrapper>
-      )}
-    </Droppable>
+    <Wrapper>
+      <Title>{boardId}</Title>
+      <Droppable droppableId={boardId}>
+        {(drop, info) => (
+          <DropArea
+            isDragDepart={Boolean(info.draggingFromThisWith)}
+            isDragArrive={info.isDraggingOver}
+            ref={drop.innerRef}
+            {...drop.droppableProps}
+          >
+            {cards.map((card, index) => (
+              <Card key={card} index={index} text={card} />
+            ))}
+            {drop.placeholder}
+          </DropArea>
+        )}
+      </Droppable>
+    </Wrapper>
   );
 }
 export default Board;

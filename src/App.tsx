@@ -6,7 +6,7 @@ import { boardsListState } from "./atoms";
 
 const BoardsList = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 `;
 
 function App() {

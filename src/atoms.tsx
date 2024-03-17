@@ -1,14 +1,19 @@
-import { atom, selector } from "recoil";
+import { atom } from "recoil";
+
+export interface ICard {
+  id: number;
+  text: string;
+}
 
 interface IboardsListState {
-  [key: string]: string[];
+  [key: string]: ICard[];
 }
 
 export const boardsListState = atom<IboardsListState>({
-  key: "board",
+  key: "boardslist",
   default: {
-    "to do": ["a", "b"],
-    doing: ["c"],
-    done: ["d", "e", "f"],
+    "to do": [],
+    doing: [],
+    done: [],
   },
 });

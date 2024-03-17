@@ -1,6 +1,7 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
+import { ICard } from "../atoms";
 
 const Wrapper = styled.div<{ isDragging: boolean }>`
   display: flex;
@@ -9,15 +10,13 @@ const Wrapper = styled.div<{ isDragging: boolean }>`
   padding: 5px;
 `;
 
-interface ICardProps {
-  text: string;
+interface ICardProps extends ICard {
   index: number;
 }
 
-function Card({ text, index }: ICardProps) {
-  console.log(text, "has been rendered");
+function Card({ id, text, index }: ICardProps) {
   return (
-    <Draggable draggableId={text} index={index}>
+    <Draggable draggableId={id + ""} index={index}>
       {(drag, info) => (
         <Wrapper
           ref={drag.innerRef}

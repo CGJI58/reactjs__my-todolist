@@ -40,7 +40,7 @@ interface IForm {
   task: string;
 }
 
-const Form = styled.div`
+const Form = styled.form`
   width: 100%;
   input {
     width: 100%;
@@ -61,14 +61,12 @@ function Board({ boardId, cards }: IBoardProps) {
       id: Date.now(),
       text: task,
     };
-
     setCards((allBoards) => {
       return {
         ...allBoards,
         [boardId]: [newTask, ...allBoards[boardId]],
       };
     });
-
     setValue("task", "");
   };
 

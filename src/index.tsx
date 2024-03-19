@@ -61,10 +61,17 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   background-color: ${(props) => props.theme.bgColor};
   color:${(props) => props.theme.textColor};
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 a {
   text-decoration: none;
   color: inherit;
+}
+#root {
+  width: 100%;
 }
 `;
 

@@ -5,8 +5,12 @@ import Board from "./components/Board";
 import { boardsListState } from "./atoms";
 
 const BoardsList = styled.div`
-  display: flex;
-  justify-content: space-evenly;
+  width: 100%;
+  height: minmax(400px, 100%);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 300px);
+  gap: 10px;
+  padding: 10px;
 `;
 
 function App() {

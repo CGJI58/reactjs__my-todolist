@@ -4,9 +4,11 @@ import Card from "./Card";
 import { useForm } from "react-hook-form";
 import { ICard, boardsListState } from "../atoms";
 import { useSetRecoilState } from "recoil";
+import { inherits } from "util";
 
 const Wrapper = styled.div`
   border: 1px solid ${(props) => props.theme.accentColor};
+  height: 300px;
 `;
 
 const Title = styled.h2`
@@ -24,15 +26,10 @@ interface IDropArea {
 const DropArea = styled.div<IDropArea>`
   display: flex;
   flex-direction: column;
-  width: 200px;
-  min-height: 200px;
-  overflow: hidden;
+  height: 250px;
+  overflow-y: scroll;
   background-color: ${(props) =>
-    props.isDragArrive
-      ? "teal"
-      : props.isDragDepart
-      ? "tomato"
-      : props.theme.bgColor};
+    props.isDragArrive ? "teal" : props.isDragDepart ? "tomato" : "inherit"};
   transition: background-color 0.3s ease-in-out;
 `;
 

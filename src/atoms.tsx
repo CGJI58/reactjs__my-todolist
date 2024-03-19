@@ -15,5 +15,8 @@ export const boardsListState = atom<IboardsListState>({
     "to do": [],
     doing: [],
     done: [],
+    a: [],
+    b: [],
+    c: [],
   },
 });

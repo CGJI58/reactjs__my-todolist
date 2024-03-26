@@ -1,7 +1,8 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
-import { ICard } from "../atoms";
+import { ICard, boardsListState } from "../atoms";
+import { useSetRecoilState } from "recoil";
 
 const Wrapper = styled.div<{ isDragging: boolean }>`
   display: flex;
@@ -29,11 +30,21 @@ const DelBtn = styled.div`
 
 interface ICardProps extends ICard {
   index: number;
+  boardId: string;
 }
 
-function Card({ id, text, index }: ICardProps) {
+function Card({ id, text, index, boardId }: ICardProps) {
+  const setCards = useSetRecoilState(boardsListState);
   const deleteCard = () => {
-    console.log(id);
+    setCards((allBoards) => {
+      const modifiedBoard = [...allBoards[boardId]].filter(
+        (item) => item.id !== id
+      );
+      return {
+        ...allBoards,
+        [boardId]: modifiedBoard,
+      };
+    });
   };
   return (
     <Draggable draggableId={id + ""} index={index}>

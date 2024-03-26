@@ -86,7 +86,7 @@ function Board({ boardId, cards }: IBoardProps) {
             {...drop.droppableProps}
           >
             {cards.map((card, index) => (
-              <Card key={card.id} index={index} id={card.id} text={card.text} />
+              <Card key={card.id} index={index} id={card.id} text={card.text} boardId={boardId} />
             ))}
             {drop.placeholder}
           </DropArea>

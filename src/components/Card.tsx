@@ -4,11 +4,12 @@ import styled from "styled-components";
 import { ICard, boardsListState } from "../atoms";
 import { useSetRecoilState } from "recoil";
 
-const Wrapper = styled.div<{ isDragging: boolean }>`
+const Wrapper = styled.div<{ isdragging: string }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: ${(props) => (props.isDragging ? "skyblue" : "darkblue")};
+  background-color: ${(props) =>
+    props.isdragging === "true" ? "skyblue" : "darkblue"};
   margin: 5px 0;
   padding: 5px;
 `;
@@ -34,9 +35,9 @@ interface ICardProps extends ICard {
 }
 
 function Card({ id, text, index, boardId }: ICardProps) {
-  const setCards = useSetRecoilState(boardsListState);
+  const setBoards = useSetRecoilState(boardsListState);
   const deleteCard = () => {
-    setCards((allBoards) => {
+    setBoards((allBoards) => {
       const modifiedBoard = [...allBoards[boardId]].filter(
         (item) => item.id !== id
       );
@@ -52,7 +53,7 @@ function Card({ id, text, index, boardId }: ICardProps) {
         <Wrapper
           ref={drag.innerRef}
           {...drag.draggableProps}
-          isDragging={info.isDragging}
+          isdragging={info.isDragging + ""}
         >
           <Handle {...drag.dragHandleProps}>=</Handle>
           <TextBox>{text}</TextBox>

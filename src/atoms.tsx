@@ -5,8 +5,10 @@ export interface ICard {
   text: string;
 }
 
+type IBoard = string;
+
 interface IboardsListState {
-  [key: string]: ICard[];
+  [key: IBoard]: ICard[];
 }
 
 export const boardsListState = atom<IboardsListState>({
